@@ -2,7 +2,7 @@ import { db } from "../database/database.connection.js";
 
 export async function getCustomers(_, res) {
   try {
-    const games = await db.query("SELECT * FROM customers");
+    const games = await db.query("SELECT *, TO_CHAR(birthday, 'YYYY-MM-DD') AS birthday FROM customers;");
     res.send(games.rows);
   } catch (err) {
     return res.status(500).send(err.message);
